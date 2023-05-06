@@ -24,7 +24,7 @@ func NewKafkaReader() *Reader {
 	}
 }
 
-func (k *Reader) FetchMessage(ctx context.Context, messages chan<- kafkago.Message) error {
+func (k *Reader) FetchMessage(ctx context.Context, messages chan<- kafkago.Message) error {  // It takes a context and a channel of Kafka messages as input parameters. It uses an infinite loop to fetch messages from the Kafka, and then selects either a context or the channel of messages
 	for {
 		message, err := k.Reader.FetchMessage(ctx)
 		if err != nil {
@@ -40,7 +40,7 @@ func (k *Reader) FetchMessage(ctx context.Context, messages chan<- kafkago.Messa
 	}
 }
 
-func (k *Reader) CommitMessages(ctx context.Context, messageCommitChan <-chan kafkago.Message) error {
+func (k *Reader) CommitMessages(ctx context.Context, messageCommitChan <-chan kafkago.Message) error {  // commits Kafka messages that have been read by the reader
 	for {
 		select {
 		case <-ctx.Done():
